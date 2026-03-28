@@ -52,8 +52,18 @@ type Product = {
   size_chart_type: string | null;
 };
 
-function generateUniqueSlug() {
-  return `p-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 6)}`;
+async function generateNextSlug(): Promise<string> {
+  const { data } = await supabase
+    .from('products')
+    .select('slug')
+    .order('created_at', { ascending: false });
+  
+  let maxNum = 99;
+  (data || []).forEach(p => {
+    const num = parseInt(p.slug, 10);
+    if (!isNaN(num) && num > maxNum) maxNum = num;
+  });
+  return String(maxNum + 1);
 }
 
 const emptyProduct: Partial<Product> = {
@@ -99,7 +109,7 @@ export default function AdminProductsPage() {
       const payload: Partial<Product> = {
         ...product,
         images: (product.images || []).map(s => s.trim()).filter(Boolean),
-        slug: product.slug || generateUniqueSlug(),
+        slug: product.slug || await generateNextSlug(),
         price: product.price ?? 0,
         stock: product.stock ?? 0,
         rating_avg: product.rating_avg ?? null,
