@@ -7,7 +7,7 @@ import { useSiteSettings } from '@/hooks/use-site-settings';
 
 export function AnnouncementBar() {
   const { language } = useLanguageStore();
-  const { settings } = useSiteSettings();
+  const { data: settings } = useSiteSettings();
   
   const isEnabled = settings?.show_announcement_bar !== 'false';
 
