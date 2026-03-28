@@ -109,7 +109,7 @@ export default function AdminProductsPage() {
       const payload: Partial<Product> = {
         ...product,
         images: (product.images || []).map(s => s.trim()).filter(Boolean),
-        slug: product.slug || generateUniqueSlug(),
+        slug: product.slug || await generateNextSlug(),
         price: product.price ?? 0,
         stock: product.stock ?? 0,
         rating_avg: product.rating_avg ?? null,
