@@ -52,6 +52,10 @@ type Product = {
   size_chart_type: string | null;
 };
 
+function generateUniqueSlug() {
+  return `p-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 6)}`;
+}
+
 const emptyProduct: Partial<Product> = {
   title: '', slug: '', price: 0, compare_at_price: null, stock: 0,
   is_active: true, is_featured: false, is_new: false, is_flash_sale: false, is_super: false, is_mega: false,
@@ -95,6 +99,7 @@ export default function AdminProductsPage() {
       const payload: Partial<Product> = {
         ...product,
         images: (product.images || []).map(s => s.trim()).filter(Boolean),
+        slug: product.slug || generateUniqueSlug(),
         price: product.price ?? 0,
         stock: product.stock ?? 0,
         rating_avg: product.rating_avg ?? null,
@@ -224,10 +229,12 @@ export default function AdminProductsPage() {
                 <Label>টাইটেল</Label>
                 <Input value={editing.title || ''} onChange={e => setEditing({ ...editing, title: e.target.value })} required />
               </div>
-              <div className="space-y-2">
-                <Label>Slug</Label>
-                <Input value={editing.slug || ''} onChange={e => setEditing({ ...editing, slug: e.target.value })} required />
-              </div>
+              {editing.slug && (
+                <div className="space-y-2">
+                  <Label>Slug (অটো জেনারেট)</Label>
+                  <Input value={editing.slug} disabled className="bg-muted" />
+                </div>
+              )}
               <div className="grid grid-cols-2 gap-3">
                 <div className="space-y-2">
                   <Label>দাম (৳)</Label>
