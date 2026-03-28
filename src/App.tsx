@@ -142,7 +142,7 @@ function AppRoutes() {
       <FadeIn key={undefined}>
         <Routes>
           <Route path="/" element={<Index />} />
-          <Route path="/c/:slug" element={<CategoryPage />} />
+          <Route path="/:slug" element={<CategoryPage />} />
           <Route path="/all-products" element={<AllProductsPage />} />
           <Route path="/wishlist" element={<WishlistPage />} />
           <Route path="/search" element={<SearchPage />} />

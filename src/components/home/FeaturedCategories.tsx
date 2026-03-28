@@ -46,7 +46,7 @@ export function FeaturedCategories() {
             transition={{ delay: index * 0.08, duration: 0.4 }}
           >
             <Link
-              to={`/c/${cat.slug}`}
+              to={`/${cat.slug}`}
               className="group relative block overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-1"
               style={{ borderRadius: radius.category, aspectRatio: `${aspectRatio}` }}
             >

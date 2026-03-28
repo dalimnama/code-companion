@@ -45,7 +45,7 @@ serve(async () => {
 
   for (const c of categories) {
     xml += `  <url>
-    <loc>${SITE_URL}/c/${c.slug}</loc>
+    <loc>${SITE_URL}/${c.slug}</loc>
     <lastmod>${c.created_at?.split("T")[0] || today}</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>

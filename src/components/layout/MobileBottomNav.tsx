@@ -210,7 +210,7 @@ export function MobileBottomNav() {
                   key={cat.id}
                   onClick={() => {
                     setShowCategories(false);
-                    navigate(`/c/${cat.slug}`);
+                    navigate(`/${cat.slug}`);
                   }}
                   className="px-4 py-3 rounded-xl bg-muted text-sm font-medium text-foreground hover:bg-muted/80 transition-colors text-center"
                 >
