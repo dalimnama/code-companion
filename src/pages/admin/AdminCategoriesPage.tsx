@@ -23,14 +23,19 @@ export default function AdminCategoriesPage() {
     queryFn: async () => { const { data } = await supabase.from('categories').select('*').order('sort_order'); return data || []; },
   });
 
+  function generateSlug(name: string) {
+    return name.trim().toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+  }
+
   const saveCat = useMutation({
     mutationFn: async (cat: any) => {
+      const payload = { ...cat, slug: generateSlug(cat.name) };
       if (catIsNew) {
-        const { error } = await supabase.from('categories').insert(cat);
+        const { error } = await supabase.from('categories').insert(payload);
         if (error) throw error;
       } else {
-        const { id, ...rest } = cat;
-        const { error } = await supabase.from('categories').update(rest).eq('id', id);
+        const { id, ...rest } = payload;
+        const { error } = await supabase.from('categories').update(rest).eq('id', cat.id);
         if (error) throw error;
       }
     },
@@ -86,7 +91,7 @@ export default function AdminCategoriesPage() {
 
         <TabsContent value="categories" className="space-y-4">
           <div className="flex justify-end">
-            <Button onClick={() => { setCatEditing({ name: '', name_bn: '', slug: '', image: '', is_active: true, sort_order: 0 }); setCatIsNew(true); }}>
+            <Button onClick={() => { setCatEditing({ name: '', name_bn: '', image: '', is_active: true, sort_order: 0 }); setCatIsNew(true); }}>
               <Plus className="h-4 w-4 mr-2" /> নতুন ক্যাটাগরি
             </Button>
           </div>
@@ -148,7 +153,7 @@ export default function AdminCategoriesPage() {
             <form onSubmit={e => { e.preventDefault(); saveCat.mutate(catEditing); }} className="space-y-3">
               <div className="space-y-2"><Label>নাম (English)</Label><Input value={catEditing.name} onChange={e => setCatEditing({ ...catEditing, name: e.target.value })} required /></div>
               <div className="space-y-2"><Label>নাম (বাংলা)</Label><Input value={catEditing.name_bn} onChange={e => setCatEditing({ ...catEditing, name_bn: e.target.value })} required /></div>
-              <div className="space-y-2"><Label>Slug</Label><Input value={catEditing.slug} onChange={e => setCatEditing({ ...catEditing, slug: e.target.value })} required /></div>
+              <div className="space-y-2"><Label>Slug (অটো)</Label><Input value={generateSlug(catEditing.name)} disabled className="bg-muted" /></div>
               <div className="space-y-2"><Label>ইমেজ URL</Label><Input value={catEditing.image || ''} onChange={e => setCatEditing({ ...catEditing, image: e.target.value })} /></div>
               <div className="space-y-2"><Label>সর্ট অর্ডার</Label><Input type="number" value={catEditing.sort_order ?? ''} onChange={e => setCatEditing({ ...catEditing, sort_order: e.target.value === '' ? null : Number(e.target.value) })} /></div>
               <label className="flex items-center gap-2 text-sm"><Switch checked={catEditing.is_active} onCheckedChange={v => setCatEditing({ ...catEditing, is_active: v })} /> সক্রিয়</label>
