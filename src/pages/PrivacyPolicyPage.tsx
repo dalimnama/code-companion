@@ -1,0 +1,29 @@
+import { ShopLayout } from '@/components/layout/ShopLayout';
+import { useSiteSettings } from '@/hooks/use-site-settings';
+
+export default function PrivacyPolicyPage() {
+  const { data: settings } = useSiteSettings();
+  const email = settings?.email || 'rikapioshop@gmail.com';
+
+  return (
+    <ShopLayout>
+      <div className="container-shop py-10 max-w-3xl mx-auto prose prose-sm">
+        <h1>Privacy Policy</h1>
+        <p>Last updated: February 2026</p>
+        <h2>Information We Collect</h2>
+        <p>We collect information you provide during checkout including name, email, phone number, and delivery address. This information is used solely to process and deliver your orders.</p>
+        <h2>How We Use Your Information</h2>
+        <ul>
+          <li>Process and fulfill orders</li>
+          <li>Send order confirmations and updates</li>
+          <li>Improve our services</li>
+          <li>Respond to customer inquiries</li>
+        </ul>
+        <h2>Data Security</h2>
+        <p>We implement appropriate security measures to protect your personal information. We do not sell or share your data with third parties except as required to fulfill your orders.</p>
+        <h2>Contact</h2>
+        <p>For privacy concerns, contact us at {email}</p>
+      </div>
+    </ShopLayout>
+  );
+}

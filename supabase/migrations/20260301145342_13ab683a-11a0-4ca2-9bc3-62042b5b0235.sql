@@ -1,0 +1,1 @@
+INSERT INTO site_settings (key, value, label, category) VALUES ('logo_height', '40', 'লোগো উচ্চতা (px)', 'logo') ON CONFLICT DO NOTHING;
