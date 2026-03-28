@@ -3,9 +3,14 @@ import { useState, useEffect, useRef } from 'react';
 import { cn } from '@/lib/utils';
 import { supabase } from '@/integrations/supabase/client';
 import { useQuery } from '@tanstack/react-query';
+import { useSiteSettings } from '@/hooks/use-site-settings';
 
 export function AnnouncementBar() {
   const { language } = useLanguageStore();
+  const { data: settings } = useSiteSettings();
+  
+  const isEnabled = settings?.show_announcement_bar !== 'false';
+
   const { data: items } = useQuery({
     queryKey: ['announcement-items'],
     queryFn: async () => {
@@ -18,6 +23,7 @@ export function AnnouncementBar() {
       return data;
     },
     staleTime: 1000 * 60 * 30,
+    enabled: isEnabled,
   });
 
   const [hidden, setHidden] = useState(false);
@@ -41,7 +47,7 @@ export function AnnouncementBar() {
     return content;
   }).join('   ★   ') || '';
 
-  if (!text) return null;
+  if (!isEnabled || !text) return null;
 
   return (
     <div
