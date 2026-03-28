@@ -33,7 +33,7 @@ const Index = () => {
         title={t('bestSellers')}
         products={featured.data}
         isLoading={featured.isLoading}
-        viewAllLink="/c/fashion"
+        viewAllLink="/all-products"
       />
 
       {/* Flash Sale */}

@@ -205,7 +205,7 @@ export function Header() {
               {categories?.map((cat) => (
                 <Link
                   key={cat.id}
-                  to={`/c/${cat.slug}`}
+                  to={`/${cat.slug}`}
                   className="px-3.5 py-1.5 text-sm text-muted-foreground hover:text-primary hover:bg-primary/5 rounded-lg transition-all whitespace-nowrap"
                 >
                   {language === 'bn' ? cat.name_bn : cat.name}
@@ -274,7 +274,7 @@ export function Header() {
                           initial={{ opacity: 0, x: -10 }}
                           animate={{ opacity: 1, x: 0 }}
                           transition={{ delay: i * 0.03 }}
-                          onClick={() => navTo(`/c/${cat.slug}`)}
+                          onClick={() => navTo(`/${cat.slug}`)}
                           className="flex items-center justify-between w-full px-3 py-2.5 rounded-xl text-sm text-foreground hover:bg-primary/8 hover:text-primary transition-all group active:scale-[0.98]"
                         >
                           <span>{language === 'bn' ? cat.name_bn : cat.name}</span>

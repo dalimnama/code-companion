@@ -129,7 +129,7 @@ ${userGreeting}
 - ✅ 100% অথেন্টিক পণ্য গ্যারান্টি
 
 📁 CATEGORIES:
-${categories.map(c => `- [${c.name_bn}](https://rikapio.shop/c/${c.slug})`).join("\n")}
+${categories.map(c => `- [${c.name_bn}](https://rikapio.shop/${c.slug})`).join("\n")}
 
 📦 PRODUCTS:
 ${products.map(p => {
@@ -143,7 +143,7 @@ ${orderContext}
 
 📌 RESPONSE RULES:
 1. ALWAYS respond in বাংলা
-2. ALWAYS use full clickable markdown links: [Name](https://rikapio.shop/p/slug) or [Category](https://rikapio.shop/c/slug)
+2. ALWAYS use full clickable markdown links: [Name](https://rikapio.shop/p/slug) or [Category](https://rikapio.shop/slug)
 3. For order tracking: if ORDER FOUND info is above, share it nicely formatted. Otherwise ask for order ID
 4. Track link format: [📦 অর্ডার ট্র্যাক করুন](https://rikapio.shop/track-order/ORDER_ID)
 5. NEVER use relative paths — always full https://rikapio.shop URL
