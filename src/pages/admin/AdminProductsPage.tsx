@@ -52,6 +52,10 @@ type Product = {
   size_chart_type: string | null;
 };
 
+function generateUniqueSlug() {
+  return `p-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 6)}`;
+}
+
 const emptyProduct: Partial<Product> = {
   title: '', slug: '', price: 0, compare_at_price: null, stock: 0,
   is_active: true, is_featured: false, is_new: false, is_flash_sale: false, is_super: false, is_mega: false,
