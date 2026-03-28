@@ -142,7 +142,6 @@ function AppRoutes() {
       <FadeIn key={undefined}>
         <Routes>
           <Route path="/" element={<Index />} />
-          <Route path="/:slug" element={<CategoryPage />} />
           <Route path="/all-products" element={<AllProductsPage />} />
           <Route path="/wishlist" element={<WishlistPage />} />
           <Route path="/search" element={<SearchPage />} />
@@ -184,6 +183,8 @@ function AppRoutes() {
             <Route path="settings/*" element={<AdminSettingsPage />} />
           </Route>
 
+          {/* Category slug route - must be after all static routes */}
+          <Route path="/:slug" element={<CategoryPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </FadeIn>
