@@ -81,20 +81,20 @@ export function HeroBanner() {
   const isFirstRender = current === 0 && !hasInteracted;
 
   const slideVariants = {
-    enter: (dir: number) => ({
-      x: dir > 0 ? '100%' : '-100%',
+    enter: {
       opacity: 0,
-    }),
-    center: {
-      x: 0,
-      opacity: 1,
-      transition: { duration: 0.5, ease: [0.32, 0.72, 0, 1] as [number, number, number, number] },
+      scale: 1.08,
     },
-    exit: (dir: number) => ({
-      x: dir > 0 ? '-30%' : '30%',
+    center: {
+      opacity: 1,
+      scale: 1,
+      transition: { duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] as [number, number, number, number] },
+    },
+    exit: {
       opacity: 0,
-      transition: { duration: 0.4, ease: [0.32, 0.72, 0, 1] as [number, number, number, number] },
-    }),
+      scale: 0.95,
+      transition: { duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] as [number, number, number, number] },
+    },
   };
 
   const renderImage = (imgBanner: typeof banner, eager: boolean) => (
