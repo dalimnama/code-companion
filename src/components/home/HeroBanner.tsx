@@ -135,10 +135,9 @@ export function HeroBanner() {
             )}
           </div>
         ) : (
-          <AnimatePresence initial={false} custom={direction} mode="wait">
+          <AnimatePresence initial={false} mode="popLayout">
             <motion.div
               key={current}
-              custom={direction}
               variants={slideVariants}
               initial="enter"
               animate="center"
